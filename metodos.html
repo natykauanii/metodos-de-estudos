@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Estudo - EstudeFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container nav-flex">
+            <div class="logo">⚡ Estude<span>Flow</span></div>
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="metodos.html" class="ativo">Métodos & Timer</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="titulo-pagina">
+            <h2>Técnicas Comprovadas de Estudo</h2>
+            <p>Escolha um método abaixo e use o cronômetro para começar agora.</p>
+        </div>
+
+        <!-- Cronômetro Interativo -->
+        <div class="timer-box">
+            <div>
+                <h3>🍅 Timer Pomodoro</h3>
+                <p class="sub-timer">25 minutos de foco total sem distrações</p>
+            </div>
+            <div id="visor" class="timer-display">25:00</div>
+            <div class="timer-botoes">
+                <button class="btn-iniciar" onclick="iniciar()">▶ Iniciar</button>
+                <button class="btn-pausar" onclick="pausar()">⏸ Pausar</button>
+                <button class="btn-resetar" onclick="resetar()">🔄 Resetar</button>
+            </div>
+        </div>
+
+        <!-- Métodos -->
+        <div class="grid-metodos">
+            <div class="metodo">
+                <h3>1. Técnica Pomodoro 🍅</h3>
+                <span class="tag">Foco e Gestão de Tempo</span>
+                <ul>
+                    <li>Escolha uma tarefa e elimine distrações (celular longe).</li>
+                    <li>Estude focado por <strong>25 minutos</strong> seguidos.</li>
+                    <li>Faça uma pausa de <strong>5 minutos</strong> para descansar.</li>
+                    <li>A cada 4 ciclos, faça uma pausa maior de 20 minutos.</li>
+                </ul>
+            </div>
+
+            <div class="metodo">
+                <h3>2. Técnica Feynman 💡</h3>
+                <span class="tag">Entendimento Profundo</span>
+                <ul>
+                    <li>Estude o assunto escolhido.</li>
+                    <li>Explique a matéria em voz alta usando <strong>palavras simples</strong>, como se ensinasse uma criança.</li>
+                    <li>Onde você travar ou não souber explicar, volte ao livro e revise.</li>
+                </ul>
+            </div>
+
+            <div class="metodo">
+                <h3>3. Revisão Espaçada 📅</h3>
+                <span class="tag">Memória de Longo Prazo</span>
+                <ul>
+                    <li>Não tente decorar tudo em um único dia.</li>
+                    <li>Revise o conteúdo após: <strong>24 horas</strong>, <strong>7 dias</strong>, <strong>15 dias</strong> e <strong>30 dias</strong>.</li>
+                    <li>Use cartões de perguntas e respostas (Flashcards).</li>
+                </ul>
+            </div>
+
+            <div class="metodo">
+                <h3>4. Estudo Ativo (Active Recall) ✍️</h3>
+                <span class="tag">Alta Performance</span>
+                <ul>
+                    <li>Feche o caderno após ler um capítulo.</li>
+                    <li>Escreva em uma folha em branco tudo o que você lembra.</li>
+                    <li>Faça exercícios e simulados antes de reler a teoria.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 EstudeFlow - Guia de Métodos de Estudo</p>
+    </footer>
+
+    <script>
+        let segundosTotais = 25 * 60;
+        let cronometro = null;
+
+        function atualizarTela() {
+            let min = Math.floor(segundosTotais / 60);
+            let seg = segundosTotais % 60;
+            document.getElementById("visor").innerText = 
+                (min < 10 ? "0" : "") + min + ":" + (seg < 10 ? "0" : "") + seg;
+        }
+
+        function iniciar() {
+            if (cronometro !== null) return;
+            cronometro = setInterval(function() {
+                if (segundosTotais > 0) {
+                    segundosTotais--;
+                    atualizarTela();
+                } else {
+                    clearInterval(cronometro);
+                    cronometro = null;
+                    alert("Tempo esgotado! Faça uma pausa de 5 minutos.");
+                }
+            }, 1000);
+        }
+
+        function pausar() {
+            clearInterval(cronometro);
+            cronometro = null;
+        }
+
+        function resetar() {
+            pausar();
+            segundosTotais = 25 * 60;
+            atualizarTela();
+        }
+    </script>
+</body>
+</html>
